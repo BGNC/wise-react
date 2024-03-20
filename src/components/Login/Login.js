@@ -18,6 +18,7 @@ const Login = () => {
     }
 
   return (
+    
     <div className='login-container'>
       <div className='input-group'>
         <input type='email' className='input-field' placeholder='Email' />
