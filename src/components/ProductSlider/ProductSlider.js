@@ -19,8 +19,13 @@ const ProductSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const groupedProducts = [];
-  for (let i = 0; i < products.length; i += 3) {
-    groupedProducts.push(products.slice(i, i + 3));
+  for (let i = 0; i < products.length; i++) {
+    if (i + 3 <= products.length) {
+      groupedProducts.push(products.slice(i, i + 3));
+    } else {
+      const remaining = 3 - (products.length - i);
+      groupedProducts.push([...products.slice(i), ...products.slice(0, remaining)]);
+    }
   }
 
   const handleProductClick = (product) => {
@@ -47,7 +52,7 @@ const ProductSlider = () => {
                     <img src={product.imageUrl} className="card-img-top" alt={product.name} />
                     <div className="card-body">
                       <h5 className="card-title">Product Name: {product.name}</h5>
-                      <p className="product-price"><b>Price</b> : ${product.price}</p>
+                      <p className="product-price"><b>Price</b>: ${product.price}</p>
                     </div>
                   </div>
                 ))}
@@ -72,7 +77,7 @@ const ProductSlider = () => {
               <img src={selectedProduct.imageUrl} alt={selectedProduct.name} style={{ width: '100px', height: '100px' }} />
               <h3>Product Name: {selectedProduct.name}</h3>
               <div className="product-rating">
-                <span>Rating: </span>
+                <span>Rating:</span>
                 {/* Sembolik yıldızlar ve puan */}
                 <span className="stars">★★★★★</span>
                 <span>(5.0)</span>
